@@ -78,6 +78,7 @@ ul ul, ul ol, ol ul, ol ol {
 
 p {
   margin: 1rem 0;
+	text-align: justify;
 }
 
 img {
