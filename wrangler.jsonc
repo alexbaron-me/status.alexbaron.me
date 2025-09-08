@@ -25,7 +25,17 @@
 			],
 			"fallthrough": true
 		}
-	]
+	],
+	"vars": {
+		"ENV": "production"
+	},
+	"env": {
+		"dev": {
+			"vars": {
+				"ENV": "development"
+			}
+		}
+	}
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

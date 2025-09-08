@@ -2,7 +2,7 @@ import { parse } from 'marked';
 import readme from '../README.md';
 
 const targetBaseUrl = 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status';
-const readmeHtml = parse(readme);
+const readmeHtml = parse(readme) as string;
 
 type Handler = ExportedHandler<Env>['fetch'];
 
@@ -35,6 +35,17 @@ const rootHandler: Handler = async (request, env, ctx) => {
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const url = new URL(request.url);
+
+		// Redirect to HTTPS in production
+		if (env.ENV === 'production' && url.protocol !== 'https:') {
+			url.protocol = 'https:';
+			return new Response(null, {
+				status: 301,
+				headers: {
+					'Location': url.toString(),
+				},
+			})
+		}
 
 		if (url.pathname.trim() === '/' || url.pathname.trim() === '') {
 			return rootHandler(request, env, ctx);
