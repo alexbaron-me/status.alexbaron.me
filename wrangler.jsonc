@@ -15,6 +15,16 @@
 			"pattern": "status.alexbaron.me",
 			"custom_domain": true
 		}
+	],
+	"rules": [
+		// Allow importing of README as text
+		{
+			"type": "Text",
+			"globs": [
+				"**/*.md"
+			],
+			"fallthrough": true
+		}
 	]
 	/**
 	 * Smart Placement
