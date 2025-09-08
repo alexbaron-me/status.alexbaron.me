@@ -1,8 +1,22 @@
 import { parse } from 'marked';
 import readme from '../README.md';
+import styles from './styles.css';
 
 const targetBaseUrl = 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status';
 const readmeHtml = parse(readme) as string;
+
+const htmlTemplate = (content: string) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Status Code Redirect Service</title>
+    <style>${styles}</style>
+</head>
+<body>
+    ${content}
+</body>
+</html>`;
 
 type Handler = ExportedHandler<Env>['fetch'];
 
@@ -25,7 +39,7 @@ const statusCodeHandler: Handler = async (request, env, ctx) => {
 
 // Display project README
 const rootHandler: Handler = async (request, env, ctx) => {
-	return new Response(readmeHtml, {
+	return new Response(htmlTemplate(readmeHtml), {
 		headers: {
 			'Content-Type': 'text/html; charset=utf-8',
 		},

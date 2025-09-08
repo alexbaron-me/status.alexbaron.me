@@ -24,6 +24,14 @@
 				"**/*.md"
 			],
 			"fallthrough": true
+		},
+		// Allow importing of CSS files as text
+		{
+			"type": "Text",
+			"globs": [
+				"**/*.css"
+			],
+			"fallthrough": true
 		}
 	],
 	"vars": {
