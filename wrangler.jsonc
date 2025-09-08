@@ -20,17 +20,13 @@
 		// Allow importing of README as text
 		{
 			"type": "Text",
-			"globs": [
-				"**/*.md"
-			],
+			"globs": ["**/*.md"],
 			"fallthrough": true
 		},
 		// Allow importing of CSS files as text
 		{
 			"type": "Text",
-			"globs": [
-				"**/*.css"
-			],
+			"globs": ["**/*.css"],
 			"fallthrough": true
 		}
 	],
