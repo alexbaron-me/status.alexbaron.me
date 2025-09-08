@@ -26,9 +26,9 @@ https://status.alexbaron.me/{status_code}
 
 ### Examples
 
-- `https://status.alexbaron.me/404`  MDN docs for 404 Not Found
-- `https://status.alexbaron.me/503`  MDN docs for 503 Service Unavailable
-- `https://status.alexbaron.me/418`  MDN docs for 418 I'm a teapot
+- `https://status.alexbaron.me/404` &#8594; docs for 404 Not Found
+- `https://status.alexbaron.me/503` &#8594; docs for 503 Service Unavailable
+- `https://status.alexbaron.me/418` &#8594; docs for 418 I'm a teapot
 
 ## Technical Details
 
