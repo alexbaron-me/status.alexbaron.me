@@ -1,18 +1,20 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+const targetBaseUrl = 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		const url = new URL(request.url);
+
+		try {
+			const clearedPath = url.pathname.replace(/^\/+|\/+$/g, '');
+			const statusCode = Number.parseInt(clearedPath);
+
+			if (Number.isNaN(statusCode) || statusCode < 100 || statusCode > 599) {
+				throw new Error('Invalid status code'); // Trigger catch block
+			}
+
+			return Response.redirect(`${targetBaseUrl}/${statusCode}`, 302);
+		} catch {
+			return new Response('Invalid status code', { status: 400 });
+		}
 	},
 } satisfies ExportedHandler<Env>;
