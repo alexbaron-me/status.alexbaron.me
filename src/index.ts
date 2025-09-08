@@ -21,12 +21,12 @@ const htmlTemplate = (content: string) => `<!DOCTYPE html>
 
 type Handler = ExportedHandler<Env>["fetch"];
 
-const statusCodeHandler: Handler = async (request, env, ctx) => {
+const statusCodeHandler: Handler = async (request, _env, _ctx) => {
 	const url = new URL(request.url);
 
 	try {
 		const clearedPath = url.pathname.replace(/^\/+|\/+$/g, "");
-		const statusCode = Number.parseInt(clearedPath);
+		const statusCode = Number.parseInt(clearedPath, 10);
 
 		if (Number.isNaN(statusCode) || statusCode < 100 || statusCode > 599) {
 			throw new Error("Invalid status code"); // Trigger catch block
@@ -39,7 +39,7 @@ const statusCodeHandler: Handler = async (request, env, ctx) => {
 };
 
 // Display project README
-const rootHandler: Handler = async (request, env, ctx) => {
+const rootHandler: Handler = async (_request, _env, _ctx) => {
 	return new Response(htmlTemplate(readmeHtml), {
 		headers: {
 			"Content-Type": "text/html; charset=utf-8",
